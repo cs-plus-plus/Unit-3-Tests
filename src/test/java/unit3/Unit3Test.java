@@ -61,7 +61,8 @@ public class Unit3Test {
     @Test
     public void testReversePhoneNumber() {
         assertEquals(7654321, Unit3.reversePhoneNumber(1234567), "1234567 reversed is 7654321");
-        assertEquals(1000000, Unit3.reversePhoneNumber(1), "Reversing 1 should return 1000000 as per 7 digits validation");
+        assertEquals(9035768, Unit3.reversePhoneNumber(8675309), "8675309 reversed is 9035768");
+        assertEquals(-1, Unit3.reversePhoneNumber(1), "1 is not a 7-digit number");
         assertEquals(-1, Unit3.reversePhoneNumber(123456), "123456 is not a 7-digit number");
         assertEquals(-1, Unit3.reversePhoneNumber(12345678), "12345678 is not a 7-digit number");
         assertEquals(-1, Unit3.reversePhoneNumber(0), "0 is not a valid 7-digit number");
