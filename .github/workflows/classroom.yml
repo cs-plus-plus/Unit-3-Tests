@@ -1,0 +1,80 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: testIsPositive
+      id: testispositive
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testIsPositive
+        setup-command: mvn compile
+        command: mvn -Dtest=Unit3Test#testIsPositive test
+        timeout: 10
+        max-score: 10
+    - name: testIsWithinRange
+      id: testiswithinrange
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testIsWithinRange
+        setup-command: mvn compile
+        command: mvn -Dtest=Unit3Test#testIsWithinRange test
+        timeout: 10
+        max-score: 15
+    - name: testIsLeapYear
+      id: testisleapyear
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testIsLeapYear
+        setup-command: mvn compile
+        command: mvn -Dtest=Unit3Test#testIsLeapYear test
+        timeout: 10
+        max-score: 20
+    - name: testAreBothSameSign
+      id: testarebothsamesign
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testAreBothSameSign
+        setup-command: mvn compile
+        command: mvn -Dtest=Unit3Test#testAreBothSameSign test
+        timeout: 10
+        max-score: 15
+    - name: testContainsSubstring
+      id: testcontainssubstring
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testContainsSubstring
+        setup-command: mvn compile
+        command: mvn -Dtest=Unit3Test#testContainsSubstring test
+        timeout: 10
+        max-score: 20
+    - name: testReversePhoneNumber
+      id: testreversephonenumber
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testReversePhoneNumber
+        setup-command: mvn compile
+        command: mvn -Dtest=Unit3Test#testReversePhoneNumber test
+        timeout: 10
+        max-score: 20
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TESTISPOSITIVE_RESULTS: "${{steps.testispositive.outputs.result}}"
+        TESTISWITHINRANGE_RESULTS: "${{steps.testiswithinrange.outputs.result}}"
+        TESTISLEAPYEAR_RESULTS: "${{steps.testisleapyear.outputs.result}}"
+        TESTAREBOTHSAMESIGN_RESULTS: "${{steps.testarebothsamesign.outputs.result}}"
+        TESTCONTAINSSUBSTRING_RESULTS: "${{steps.testcontainssubstring.outputs.result}}"
+        TESTREVERSEPHONENUMBER_RESULTS: "${{steps.testreversephonenumber.outputs.result}}"
+      with:
+        runners: testispositive,testiswithinrange,testisleapyear,testarebothsamesign,testcontainssubstring,testreversephonenumber
