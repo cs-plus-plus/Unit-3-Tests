@@ -2,70 +2,129 @@ package unit3;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 
 public class Unit3Test {
 
-    // Test isPositive
+    // ── Method 1: isPositive (10 points) ────────────────────────────────────
+
     @Test
+    @DisplayName("isPositive: Check if a number is positive (10 points)")
     public void testIsPositive() {
-        assertTrue(Unit3.isPositive(5), "5 is positive");
-        assertFalse(Unit3.isPositive(-1), "-1 is not positive");
-        assertFalse(Unit3.isPositive(0), "0 is not positive");
-        assertTrue(Unit3.isPositive(Integer.MAX_VALUE), "Integer.MAX_VALUE is positive");
-        assertFalse(Unit3.isPositive(Integer.MIN_VALUE), "Integer.MIN_VALUE is not positive");
+        assertAll("isPositive",
+            () -> assertTrue(Unit3.isPositive(5),
+                "isPositive(5) should return true (5 is positive)"),
+            () -> assertFalse(Unit3.isPositive(-1),
+                "isPositive(-1) should return false (-1 is negative)"),
+            () -> assertFalse(Unit3.isPositive(0),
+                "isPositive(0) should return false (0 is NOT positive)"),
+            () -> assertTrue(Unit3.isPositive(Integer.MAX_VALUE),
+                "isPositive(Integer.MAX_VALUE) should return true"),
+            () -> assertFalse(Unit3.isPositive(Integer.MIN_VALUE),
+                "isPositive(Integer.MIN_VALUE) should return false")
+        );
     }
 
-    // Test isWithinRange
+    // ── Method 2: isWithinRange (15 points) ─────────────────────────────────
+
     @Test
+    @DisplayName("isWithinRange: Check if number is between bounds inclusive (15 points)")
     public void testIsWithinRange() {
-        assertTrue(Unit3.isWithinRange(5, 1, 10), "5 is within range 1 to 10");
-        assertFalse(Unit3.isWithinRange(0, 1, 10), "0 is not within range 1 to 10");
-        assertTrue(Unit3.isWithinRange(10, 1, 10), "10 is within range 1 to 10");
-        assertFalse(Unit3.isWithinRange(-5, 0, 10), "-5 is not within range 0 to 10");
-        assertTrue(Unit3.isWithinRange(1, 1, 1), "1 is within range 1 to 1 (edge case)");
+        assertAll("isWithinRange",
+            () -> assertTrue(Unit3.isWithinRange(5, 1, 10),
+                "isWithinRange(5, 1, 10) should return true (5 is between 1 and 10)"),
+            () -> assertFalse(Unit3.isWithinRange(0, 1, 10),
+                "isWithinRange(0, 1, 10) should return false (0 is below the range)"),
+            () -> assertTrue(Unit3.isWithinRange(10, 1, 10),
+                "isWithinRange(10, 1, 10) should return true (10 is the upper bound — inclusive)"),
+            () -> assertFalse(Unit3.isWithinRange(-5, 0, 10),
+                "isWithinRange(-5, 0, 10) should return false"),
+            () -> assertTrue(Unit3.isWithinRange(1, 1, 1),
+                "isWithinRange(1, 1, 1) should return true (edge case: single-value range)")
+        );
     }
 
-    // Test isLeapYear
+    // ── Method 3: isLeapYear (20 points) ────────────────────────────────────
+
     @Test
+    @DisplayName("isLeapYear: Determine if a year is a leap year (20 points)")
     public void testIsLeapYear() {
-        assertTrue(Unit3.isLeapYear(2024), "2024 is a leap year");
-        assertFalse(Unit3.isLeapYear(1900), "1900 is not a leap year");
-        assertTrue(Unit3.isLeapYear(2000), "2000 is a leap year");
-        assertFalse(Unit3.isLeapYear(2023), "2023 is not a leap year");
-        assertTrue(Unit3.isLeapYear(1600), "1600 is a leap year (multiple of 400)");
-        assertFalse(Unit3.isLeapYear(2100), "2100 is not a leap year (multiple of 100 but not 400)");
+        assertAll("isLeapYear",
+            () -> assertTrue(Unit3.isLeapYear(2024),
+                "isLeapYear(2024) should return true (divisible by 4, not by 100)"),
+            () -> assertFalse(Unit3.isLeapYear(1900),
+                "isLeapYear(1900) should return false (divisible by 100 but NOT by 400)"),
+            () -> assertTrue(Unit3.isLeapYear(2000),
+                "isLeapYear(2000) should return true (divisible by 400)"),
+            () -> assertFalse(Unit3.isLeapYear(2023),
+                "isLeapYear(2023) should return false (not divisible by 4)"),
+            () -> assertTrue(Unit3.isLeapYear(1600),
+                "isLeapYear(1600) should return true (divisible by 400)"),
+            () -> assertFalse(Unit3.isLeapYear(2100),
+                "isLeapYear(2100) should return false (divisible by 100 but not 400)")
+        );
     }
 
-    // Test areBothSameSign
+    // ── Method 4: areBothSameSign (15 points) ───────────────────────────────
+
     @Test
+    @DisplayName("areBothSameSign: Check if two numbers share the same sign (15 points)")
     public void testAreBothSameSign() {
-        assertTrue(Unit3.areBothSameSign(3, 7), "Both 3 and 7 are positive");
-        assertTrue(Unit3.areBothSameSign(-2, -8), "Both -2 and -8 are negative");
-        assertFalse(Unit3.areBothSameSign(-2, 5), "-2 is negative and 5 is positive");
-        assertTrue(Unit3.areBothSameSign(0, 0), "Both are zero (edge case)");
-        assertFalse(Unit3.areBothSameSign(0, -1), "0 is neutral and -1 is negative");
+        assertAll("areBothSameSign",
+            () -> assertTrue(Unit3.areBothSameSign(3, 7),
+                "areBothSameSign(3, 7) should return true (both positive)"),
+            () -> assertTrue(Unit3.areBothSameSign(-2, -8),
+                "areBothSameSign(-2, -8) should return true (both negative)"),
+            () -> assertFalse(Unit3.areBothSameSign(-2, 5),
+                "areBothSameSign(-2, 5) should return false (different signs)"),
+            () -> assertTrue(Unit3.areBothSameSign(0, 0),
+                "areBothSameSign(0, 0) should return true (both zero)"),
+            () -> assertFalse(Unit3.areBothSameSign(0, -1),
+                "areBothSameSign(0, -1) should return false (0 and negative)")
+        );
     }
 
-    // Test containsSubstring
+    // ── Method 5: containsSubstring (20 points) ─────────────────────────────
+
     @Test
+    @DisplayName("containsSubstring: Check if main string contains substring (20 points)")
     public void testContainsSubstring() {
-        assertTrue(Unit3.containsSubstring("hello world", "world"), "Main string contains substring 'world'");
-        assertFalse(Unit3.containsSubstring("hello world", "java"), "Main string does not contain substring 'java'");
-        assertFalse(Unit3.containsSubstring("", "test"), "Main string is empty");
-        assertFalse(Unit3.containsSubstring("test", ""), "Substring is empty");
-        assertFalse(Unit3.containsSubstring("", ""), "Both strings are empty");
-        assertTrue(Unit3.containsSubstring("abc", "abc"), "Exact match of main string and substring");
+        assertAll("containsSubstring",
+            () -> assertTrue(Unit3.containsSubstring("hello world", "world"),
+                "containsSubstring(\"hello world\", \"world\") should return true"),
+            () -> assertFalse(Unit3.containsSubstring("hello world", "java"),
+                "containsSubstring(\"hello world\", \"java\") should return false (not found)"),
+            () -> assertFalse(Unit3.containsSubstring("", "test"),
+                "containsSubstring(\"\", \"test\") should return false (main string is empty)"),
+            () -> assertFalse(Unit3.containsSubstring("test", ""),
+                "containsSubstring(\"test\", \"\") should return false (substring is empty)"),
+            () -> assertFalse(Unit3.containsSubstring("", ""),
+                "containsSubstring(\"\", \"\") should return false (both strings are empty)"),
+            () -> assertTrue(Unit3.containsSubstring("abc", "abc"),
+                "containsSubstring(\"abc\", \"abc\") should return true (exact match)")
+        );
     }
 
-    // Test reversePhoneNumber
+    // ── Method 6: reversePhoneNumber (20 points) ────────────────────────────
+
     @Test
+    @DisplayName("reversePhoneNumber: Reverse a 7-digit phone number (20 points)")
     public void testReversePhoneNumber() {
-        assertEquals(7654321, Unit3.reversePhoneNumber(1234567), "1234567 reversed is 7654321");
-        assertEquals(9035768, Unit3.reversePhoneNumber(8675309), "8675309 reversed is 9035768");
-        assertEquals(-1, Unit3.reversePhoneNumber(1), "1 is not a 7-digit number");
-        assertEquals(-1, Unit3.reversePhoneNumber(123456), "123456 is not a 7-digit number");
-        assertEquals(-1, Unit3.reversePhoneNumber(12345678), "12345678 is not a 7-digit number");
-        assertEquals(-1, Unit3.reversePhoneNumber(0), "0 is not a valid 7-digit number");
-        assertEquals(-1, Unit3.reversePhoneNumber(-1234567), "Negative numbers are not valid phone numbers");
+        assertAll("reversePhoneNumber",
+            () -> assertEquals(7654321, Unit3.reversePhoneNumber(1234567),
+                "reversePhoneNumber(1234567) should return 7654321"),
+            () -> assertEquals(9035768, Unit3.reversePhoneNumber(8675309),
+                "reversePhoneNumber(8675309) should return 9035768"),
+            () -> assertEquals(-1, Unit3.reversePhoneNumber(1),
+                "reversePhoneNumber(1) should return -1 (not 7 digits)"),
+            () -> assertEquals(-1, Unit3.reversePhoneNumber(123456),
+                "reversePhoneNumber(123456) should return -1 (only 6 digits)"),
+            () -> assertEquals(-1, Unit3.reversePhoneNumber(12345678),
+                "reversePhoneNumber(12345678) should return -1 (8 digits — too many)"),
+            () -> assertEquals(-1, Unit3.reversePhoneNumber(0),
+                "reversePhoneNumber(0) should return -1 (not a valid 7-digit number)"),
+            () -> assertEquals(-1, Unit3.reversePhoneNumber(-1234567),
+                "reversePhoneNumber(-1234567) should return -1 (negative numbers are invalid)")
+        );
     }
 }

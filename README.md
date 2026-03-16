@@ -1,59 +1,108 @@
+# Unit 3: Boolean Expressions and if Statements
 
-# Unit 3 Java Programming Project
+AP Computer Science A
 
-This project is designed for Mr. Hare's APCS-A, focusing on Unit 3 concepts such as conditional statements, Boolean expressions, and logical operators. The project includes a set of methods that students need to implement, along with unit tests to verify their functionality.
+## Overview
 
-## Project Structure
-
-- **`Unit3.java`**: Contains method headers and task descriptions. Students are required to implement the method bodies.
-- **`Unit3Test.java`**: JUnit test cases for each method in `Unit3.java`. These tests validate the correctness of the implemented methods.
-- **`pom.xml`**: Maven configuration file that manages dependencies and plugins required to build and run the project.
-
-## Prerequisites
-
-- Java 17 (or compatible version)
-- Maven 3.x
+This project covers **Unit 3: Boolean Expressions and if Statements** concepts including comparison operators, logical operators (`&&`, `||`, `!`), `if-else` statements, and compound Boolean expressions. Implement the 6 methods in `Unit3.java` and run the provided JUnit tests to verify your work.
 
 ## Getting Started
 
-### Accept the Project
+### Option 1: GitHub Codespaces (Recommended)
 
-Use link found in Google Classroom to accept in GitHub Classroom
+1. Click the green **Code** button on this repository
+2. Select the **Codespaces** tab
+3. Click **Create codespace on main**
+4. Wait for the environment to build (~2 minutes the first time)
+5. Start coding in `src/main/java/unit3/Unit3.java`
 
-### Clone the Repository
+> **Note:** If the Java extension shows errors on first load, press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows) and run **"Developer: Reload Window"**. This is a one-time setup step.
 
-Clone this repository to your local machine using GitHub Desktop.
+### Option 2: Local Development
 
+1. Accept the assignment via the GitHub Classroom link
+2. Clone the repository using GitHub Desktop
+3. Open the project in your IDE (VS Code, IntelliJ, or Eclipse)
+4. **Requirements:** Java 17+, Maven 3.x
 
-### Run Tests
+## Running Tests
 
-Run the JUnit tests to verify your implementations
+### In VS Code / Codespaces
 
+Click the green play button next to any test method in `Unit3Test.java`, or open the **Testing** sidebar (beaker icon).
 
-## Method Descriptions
+### Command Line
 
-Students need to implement the following methods in `Unit3.java`:
+Run all tests:
+```
+mvn test
+```
 
-1. **`isPositive(int number)`**: Returns `true` if the number is positive, otherwise `false`.
-2. **`isWithinRange(int number, int lower, int upper)`**: Returns `true` if the number is within the specified range (inclusive).
-3. **`isLeapYear(int year)`**: Determines if a year is a leap year based on given rules.
-4. **`areBothSameSign(int number1, int number2)`**: Checks if both numbers have the same sign (either positive or negative).
-5. **`containsSubstring(String main, String sub)`**: Returns `true` if the main string contains the substring and both are not empty.
-6. **`reversePhoneNumber(int phoneNumber)`**: Reverses the given phone number using modulo operations.
+Run a single method's tests:
+```
+mvn -Dtest=Unit3Test#testIsPositive test
+```
 
-## Common Mistakes to Avoid
+## Scoring
 
-- Using `=` instead of `==` in conditionals.
-- Ending `if` statements with a semicolon (`;`).
-- Using multiple `if` statements when `if-else` would be more appropriate.
-- Misunderstanding the use of logical operators (`&&`, `||`).
-- Failing to apply short-circuit evaluation correctly.
+| # | Method | Points | Concepts |
+|---|--------|--------|----------|
+| 1 | `isPositive(int number)` | 10 | Comparison operators |
+| 2 | `isWithinRange(int, int, int)` | 15 | Compound Boolean (`&&`) |
+| 3 | `isLeapYear(int year)` | 20 | Complex conditionals, `%` operator |
+| 4 | `areBothSameSign(int, int)` | 15 | Logical operators (`&&`, `||`) |
+| 5 | `containsSubstring(String, String)` | 20 | String methods, `&&` operator |
+| 6 | `reversePhoneNumber(int)` | 20 | Validation, String/int conversion |
+| | **Total** | **100** | |
 
-## Contributing
+## Method Details
 
-Feel free to submit issues or pull requests if you find bugs or have suggestions for improvement.
+### 1. `isPositive(int number)` — 10 points
+Returns true if the number is greater than 0. Zero is NOT positive.
+- `isPositive(5)` → `true`
+- `isPositive(-1)` → `false`
+- `isPositive(0)` → `false`
 
+### 2. `isWithinRange(int number, int lower, int upper)` — 15 points
+Returns true if the number is between lower and upper bounds (inclusive).
+- `isWithinRange(5, 1, 10)` → `true`
+- `isWithinRange(0, 1, 10)` → `false`
+- `isWithinRange(10, 1, 10)` → `true`
+
+### 3. `isLeapYear(int year)` — 20 points
+Determines if a year is a leap year: divisible by 4 but not 100, unless also divisible by 400.
+- `isLeapYear(2024)` → `true`
+- `isLeapYear(1900)` → `false`
+- `isLeapYear(2000)` → `true`
+
+### 4. `areBothSameSign(int number1, int number2)` — 15 points
+Returns true if both numbers are positive, both negative, or both zero.
+- `areBothSameSign(3, 7)` → `true`
+- `areBothSameSign(-2, 5)` → `false`
+
+### 5. `containsSubstring(String main, String sub)` — 20 points
+Returns true if main contains sub and neither string is empty.
+- `containsSubstring("hello world", "world")` → `true`
+- `containsSubstring("", "test")` → `false`
+
+### 6. `reversePhoneNumber(int phoneNumber)` — 20 points
+Reverses a 7-digit phone number. Returns -1 for invalid input.
+- `reversePhoneNumber(1234567)` → `7654321`
+- `reversePhoneNumber(123)` → `-1`
+
+## Common Mistakes
+
+- Using `=` (assignment) instead of `==` (comparison) in conditionals
+- Ending an `if` statement with a semicolon: `if (x > 5);` — this makes the body empty!
+- Using multiple `if` statements when `if-else` would be more appropriate
+- Misunderstanding short-circuit evaluation with `&&` and `||`
+- Forgetting that `&&` has higher precedence than `||` — use parentheses to be safe
+- Not handling edge cases (0, negative numbers, empty strings)
+
+## Autograding
+
+Your code is automatically graded when you push to GitHub. Check the **Actions** tab to see your score. Each method is tested independently — you earn points for each method you complete correctly.
 
 ## Contact
 
-For any questions, please contact [kevin@csplusplus.com](mailto:kevin@csplusplus.com)
+For questions, contact [kevin@csplusplus.com](mailto:kevin@csplusplus.com)
