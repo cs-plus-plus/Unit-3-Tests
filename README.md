@@ -1,108 +1,308 @@
-# Unit 3: Boolean Expressions and if Statements
+# CS++ Java — Unit 3: Boolean Expressions and if Statements
 
-AP Computer Science A
+> **Unit 3** | 100 Points | 6 Autograded Tests
 
-## Overview
+In this assignment you will write conditional logic using comparison operators, logical operators (`&&`, `||`, `!`), and if-else statements. You will also reverse a phone number using arithmetic.
 
-This project covers **Unit 3: Boolean Expressions and if Statements** concepts including comparison operators, logical operators (`&&`, `||`, `!`), `if-else` statements, and compound Boolean expressions. Implement the 6 methods in `Unit3.java` and run the provided JUnit tests to verify your work.
+---
 
-## Getting Started
+## Table of Contents
 
-### Option 1: GitHub Codespaces (Recommended)
+1. [Concepts You Need](#concepts-you-need)
+2. [Project Overview](#project-overview)
+3. [Methods to Implement](#methods-to-implement)
+4. [File Structure](#file-structure)
+5. [Autograding](#autograding)
+6. [Try It Yourself — Practice Examples](#try-it-yourself--practice-examples)
+7. [Tips for Success](#tips-for-success)
+8. [FAQ](#faq)
 
-1. Click the green **Code** button on this repository
-2. Select the **Codespaces** tab
-3. Click **Create codespace on main**
-4. Wait for the environment to build (~2 minutes the first time)
-5. Start coding in `src/main/java/unit3/Unit3.java`
+---
 
-> **Note:** If the Java extension shows errors on first load, press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows) and run **"Developer: Reload Window"**. This is a one-time setup step.
+## Concepts You Need
 
-### Option 2: Local Development
+### Comparison Operators
 
-1. Accept the assignment via the GitHub Classroom link
-2. Clone the repository using GitHub Desktop
-3. Open the project in your IDE (VS Code, IntelliJ, or Eclipse)
-4. **Requirements:** Java 17+, Maven 3.x
-
-## Running Tests
-
-### In VS Code / Codespaces
-
-Click the green play button next to any test method in `Unit3Test.java`, or open the **Testing** sidebar (beaker icon).
-
-### Command Line
-
-Run all tests:
-```
-mvn test
+```java
+a == b    // equal to
+a != b    // not equal to
+a > b     // greater than
+a < b     // less than
+a >= b    // greater than or equal to
+a <= b    // less than or equal to
 ```
 
-Run a single method's tests:
+These return `true` or `false`.
+
+### Logical Operators
+
+```java
+// AND — both must be true
+if (age >= 16 && hasPermit) { ... }
+
+// OR — at least one must be true
+if (temp > 100 || temp < 0) { ... }
+
+// NOT — flips the value
+if (!isRaining) { ... }
 ```
-mvn -Dtest=Unit3Test#testIsPositive test
+
+### If-Else Statements
+
+```java
+if (score >= 90) {
+    return "A";
+} else if (score >= 80) {
+    return "B";
+} else {
+    return "C";
+}
 ```
 
-## Scoring
+### Checking a Range
 
-| # | Method | Points | Concepts |
-|---|--------|--------|----------|
-| 1 | `isPositive(int number)` | 10 | Comparison operators |
-| 2 | `isWithinRange(int, int, int)` | 15 | Compound Boolean (`&&`) |
-| 3 | `isLeapYear(int year)` | 20 | Complex conditionals, `%` operator |
-| 4 | `areBothSameSign(int, int)` | 15 | Logical operators (`&&`, `||`) |
-| 5 | `containsSubstring(String, String)` | 20 | String methods, `&&` operator |
-| 6 | `reversePhoneNumber(int)` | 20 | Validation, String/int conversion |
-| | **Total** | **100** | |
+To check if a number is between two values (inclusive):
 
-## Method Details
+```java
+public static boolean isWithinRange(int num, int lower, int upper) {
+    return num >= lower && num <= upper;
+}
+```
 
-### 1. `isPositive(int number)` — 10 points
-Returns true if the number is greater than 0. Zero is NOT positive.
-- `isPositive(5)` → `true`
-- `isPositive(-1)` → `false`
-- `isPositive(0)` → `false`
+### Leap Year Rules
 
-### 2. `isWithinRange(int number, int lower, int upper)` — 15 points
-Returns true if the number is between lower and upper bounds (inclusive).
-- `isWithinRange(5, 1, 10)` → `true`
-- `isWithinRange(0, 1, 10)` → `false`
-- `isWithinRange(10, 1, 10)` → `true`
+A year is a leap year if:
+1. It is divisible by 4, **AND**
+2. It is NOT divisible by 100, **UNLESS**
+3. It is also divisible by 400
 
-### 3. `isLeapYear(int year)` — 20 points
-Determines if a year is a leap year: divisible by 4 but not 100, unless also divisible by 400.
-- `isLeapYear(2024)` → `true`
-- `isLeapYear(1900)` → `false`
-- `isLeapYear(2000)` → `true`
+```java
+// 2024 → leap (divisible by 4, not by 100)
+// 1900 → NOT leap (divisible by 100, not by 400)
+// 2000 → leap (divisible by 400)
+```
 
-### 4. `areBothSameSign(int number1, int number2)` — 15 points
-Returns true if both numbers are positive, both negative, or both zero.
-- `areBothSameSign(3, 7)` → `true`
-- `areBothSameSign(-2, 5)` → `false`
+### String Contains
 
-### 5. `containsSubstring(String main, String sub)` — 20 points
-Returns true if main contains sub and neither string is empty.
-- `containsSubstring("hello world", "world")` → `true`
-- `containsSubstring("", "test")` → `false`
+Check if one string contains another:
 
-### 6. `reversePhoneNumber(int phoneNumber)` — 20 points
-Reverses a 7-digit phone number. Returns -1 for invalid input.
-- `reversePhoneNumber(1234567)` → `7654321`
-- `reversePhoneNumber(123)` → `-1`
+```java
+String main = "Hello World";
+boolean result = main.contains("World");  // true
+boolean empty = "".contains("anything");  // false
+```
 
-## Common Mistakes
+### Reversing a Number with Arithmetic
 
-- Using `=` (assignment) instead of `==` (comparison) in conditionals
-- Ending an `if` statement with a semicolon: `if (x > 5);` — this makes the body empty!
-- Using multiple `if` statements when `if-else` would be more appropriate
-- Misunderstanding short-circuit evaluation with `&&` and `||`
-- Forgetting that `&&` has higher precedence than `||` — use parentheses to be safe
-- Not handling edge cases (0, negative numbers, empty strings)
+You can reverse the digits of a number using `%` and `/`:
+
+```java
+int num = 1234;
+int reversed = 0;
+while (num > 0) {
+    int digit = num % 10;       // get last digit
+    reversed = reversed * 10 + digit;  // append it
+    num = num / 10;             // remove last digit
+}
+// reversed is now 4321
+```
+
+---
+
+## Project Overview
+
+You will implement six methods in `Unit3.java`. Each method practices a different aspect of boolean logic and conditional statements.
+
+---
+
+## Methods to Implement
+
+### 1. isPositive(int number)
+Return `true` if the number is greater than 0, `false` otherwise.
+
+```java
+isPositive(5)    // returns true
+isPositive(0)    // returns false
+isPositive(-3)   // returns false
+```
+
+### 2. isWithinRange(int number, int lower, int upper)
+Return `true` if `number` is between `lower` and `upper` (inclusive on both ends).
+
+```java
+isWithinRange(5, 1, 10)    // returns true
+isWithinRange(1, 1, 10)    // returns true (inclusive)
+isWithinRange(10, 1, 10)   // returns true (inclusive)
+isWithinRange(0, 1, 10)    // returns false
+```
+
+### 3. isLeapYear(int year)
+Return `true` if the year is a leap year. A year is a leap year if it is divisible by 4, except years divisible by 100 are NOT leap years, unless they are also divisible by 400.
+
+```java
+isLeapYear(2024)   // returns true
+isLeapYear(1900)   // returns false
+isLeapYear(2000)   // returns true
+isLeapYear(2023)   // returns false
+```
+
+### 4. areBothSameSign(int number1, int number2)
+Return `true` if both numbers have the same sign (both positive, both negative, or both zero).
+
+```java
+areBothSameSign(3, 7)     // returns true (both positive)
+areBothSameSign(-2, -5)   // returns true (both negative)
+areBothSameSign(0, 0)     // returns true (both zero)
+areBothSameSign(3, -1)    // returns false
+areBothSameSign(0, 5)     // returns false
+```
+
+### 5. containsSubstring(String main, String sub)
+Return `true` if `main` contains `sub`. Return `false` if either string is null or empty.
+
+```java
+containsSubstring("Hello World", "World")   // returns true
+containsSubstring("Hello", "xyz")           // returns false
+containsSubstring("", "test")               // returns false
+containsSubstring("Hello", "")              // returns false
+```
+
+### 6. reversePhoneNumber(int phoneNumber)
+Reverse the digits of a 7-digit phone number and return the result. If the phone number is not exactly 7 digits, return `-1`.
+
+```java
+reversePhoneNumber(1234567)   // returns 7654321
+reversePhoneNumber(5551234)   // returns 4321555
+reversePhoneNumber(123)       // returns -1 (not 7 digits)
+reversePhoneNumber(12345678)  // returns -1 (not 7 digits)
+```
+
+---
+
+## File Structure
+
+```
+Unit-3-Tests/
+├── pom.xml                                <-- Maven config (DO NOT MODIFY)
+├── src/
+│   ├── main/java/unit3/
+│   │   └── Unit3.java                     <-- YOUR CODE GOES HERE
+│   └── test/java/unit3/
+│       └── Unit3Test.java                 <-- Tests (DO NOT MODIFY)
+└── .github/
+    └── workflows/
+        └── classroom.yml                  <-- Autograding (DO NOT MODIFY)
+```
+
+**Edit only `Unit3.java`.**
+
+---
 
 ## Autograding
 
-Your code is automatically graded when you push to GitHub. Check the **Actions** tab to see your score. Each method is tested independently — you earn points for each method you complete correctly.
+| Test | What It Checks | Points |
+|------|---------------|--------|
+| testIsPositive | Returns true for positive, false for zero/negative | 10 |
+| testIsWithinRange | Checks inclusive boundaries | 15 |
+| testIsLeapYear | Handles 4/100/400 rules correctly | 20 |
+| testAreBothSameSign | Checks positive/negative/zero combinations | 15 |
+| testContainsSubstring | Uses `.contains()`, handles null/empty | 20 |
+| testReversePhoneNumber | Reverses 7-digit number, -1 for invalid | 20 |
 
-## Contact
+**Total: 100 points**
 
-For questions, contact [kevin@csplusplus.com](mailto:kevin@csplusplus.com)
+---
+
+## Try It Yourself — Practice Examples
+
+Create `Practice.java` in the same directory and run it with `javac Practice.java && java Practice`.
+
+**Example 1 — Comparison operators:**
+```java
+// Practice.java
+public class Practice {
+    public static void main(String[] args) {
+        int x = 15;
+        System.out.println(x > 10);          // true
+        System.out.println(x == 15);          // true
+        System.out.println(x != 15);          // false
+        System.out.println(x >= 15);          // true
+        System.out.println(x > 10 && x < 20); // true (AND)
+        System.out.println(x > 20 || x < 5);  // false (OR)
+    }
+}
+```
+
+**Example 2 — Leap year logic:**
+```java
+// Practice.java
+public class Practice {
+    public static boolean isLeapYear(int year) {
+        if (year % 400 == 0) return true;
+        if (year % 100 == 0) return false;
+        if (year % 4 == 0) return true;
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("2024: " + isLeapYear(2024));  // true
+        System.out.println("1900: " + isLeapYear(1900));  // false
+        System.out.println("2000: " + isLeapYear(2000));  // true
+        System.out.println("2023: " + isLeapYear(2023));  // false
+    }
+}
+```
+
+**Example 3 — Reversing digits:**
+```java
+// Practice.java
+public class Practice {
+    public static int reverseNumber(int num) {
+        int reversed = 0;
+        while (num > 0) {
+            reversed = reversed * 10 + num % 10;
+            num /= 10;
+        }
+        return reversed;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reverseNumber(1234));    // 4321
+        System.out.println(reverseNumber(5551234)); // 4321555
+        System.out.println(reverseNumber(100));     // 1
+    }
+}
+```
+
+---
+
+## Tips for Success
+
+1. For `isLeapYear`, check divisibility by 400 first, then 100, then 4 — the order matters
+2. For `areBothSameSign`, consider zero as its own category. Both being zero should return `true`
+3. For `containsSubstring`, check for null and empty strings before calling `.contains()`
+4. For `reversePhoneNumber`, a 7-digit number is between 1000000 and 9999999
+5. Use `%` to get the last digit and `/` to remove the last digit when reversing
+6. Run `mvn test` after each method
+
+---
+
+## FAQ
+
+**Q: For `areBothSameSign`, is zero positive or negative?**
+Neither. Zero is its own case. Two zeros are the same sign (`true`), but zero and a positive number are not the same sign (`false`).
+
+**Q: For `containsSubstring`, should I check for `null`?**
+Yes. If either `main` or `sub` is `null`, return `false`. Also return `false` if either is empty.
+
+**Q: How do I check if a phone number has exactly 7 digits?**
+Check if it is between 1000000 and 9999999 (inclusive). Numbers outside this range have fewer or more than 7 digits.
+
+**Q: Can I use `String.valueOf()` to reverse the phone number?**
+The tests check for the arithmetic approach (using `%` and `/`). Use the modulo method shown in the concepts section.
+
+---
+
+View all assignments and scoring breakdowns at [csplusplus.com/maven-tests](https://csplusplus.com/maven-tests)
+
+*CS++ — AP Computer Science A — [csplusplus.com](https://csplusplus.com)*
